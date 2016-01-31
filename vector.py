@@ -1,6 +1,6 @@
 #!/user/bin/python
 # Author=Zhen Shi
-# Student number=014565117
+
 import random
 import math
 import sys
