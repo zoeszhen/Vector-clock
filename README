@@ -1,0 +1,62 @@
+# Author=Zhen Shi
+# Student number=014565117
+
+How to use it?
+
+To run this program by typing python vector.py configuration_file linenumber.
+According to the configuration file, there are three lines so please put linenumber less than four.
+
+How does it work?
+
+This program is simulate the vector clock algorithm. The Node class contain all the functionalities which used in the vector clock algorithm.
+The following list are explain the main functions in the Node class.
+
+1.readConfigFile function: Reading the configuration file which given from the commmand line and assign it to the self index.
+
+2.random_pick function: Suppose to decided whether the event is doing the local event or sending the message to other event.
+
+3.startSocketListener function: Creating the listening port to listen the messge.
+
+4.msgSender function: Establishing the connection with the target ports and sending the message.
+
+5.Main model: Creating the event object. Calling functions in the event to do the initialization.
+After that creat another thread to listening the message so that the listening and sending function can working in paralleled. 
+
+Runing the event for 100 times to sending and reciving the message.
+
+Problem?
+
+The problem for this program is when you run it in different termianl, only one terminal can recive messages. The rest of the terminal only can sending the message.
+
+In my point of view, I think it is socket blcoked. When the program using the socket.recv function, it will block the connection until it get signal. However I am trying to put sending and listening function into two different threads, it still does not work. The code will be like following text.
+
+*************************************************************************************
+while numberOfevent<100:
+	
+	thread1 = ListeningThread(selfport,event)
+	#time.sleep(5)
+	thread2 = SendingThread(event)
+	
+	thread1.start()
+	#time.sleep(5)
+	print" listening thread start"
+	thread2.start()
+	print"sending thread start"
+
+
+	thread1.join()
+	print" listening thread waitting"
+	thread2.join()
+	print" sening thread waitting"
+
+
+	#thread.append(thread)
+
+	# Thread(target=fn_client, args=(a, 1)).start()
+    # Thread(target=fn_server, args=(a, 1)).start()
+	#Thread(target=event.random_pick,args=(come,)).start()
+	#Thread(target=event.startSocketListener,args=(selfport,)).start()
+	#event.random_pick()
+	# print "number of event:",numberOfevent
+	numberOfevent+=1
+time.sleep(20)
